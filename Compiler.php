@@ -4,14 +4,29 @@ namespace Kasseler\Component\Compiler;
 
 class Compiler
 {
+    /**
+     * @var string
+     */
     private $function;
+
+    /**
+     * @var array
+     */
     private $types = ['assoc_array', 'array', 'string'];
 
+    /**
+     * @param $function
+     */
     public function __construct($function)
     {
         $this->function = $function;
     }
 
+    /**
+     * @param $string
+     *
+     * @return mixed
+     */
     private function decode($string)
     {
         $result = json_decode($string, true);
@@ -19,11 +34,21 @@ class Compiler
         return json_last_error() == JSON_ERROR_NONE ? $result : false;
     }
 
+    /**
+     * @param $string
+     *
+     * @return int
+     */
     private function isFunction($string)
     {
         return preg_match_all('/^'.$this->function.'\(.+\)$/', $string);
     }
 
+    /**
+     * @param $string
+     *
+     * @return bool
+     */
     private function getType($string)
     {
         foreach ($this->types as $type) {
@@ -35,6 +60,12 @@ class Compiler
         return false;
     }
 
+    /**
+     * @param $string
+     * @param $parameters
+     * @param $replace
+     * @param $name
+     */
     private function replaceParameters(&$string, &$parameters, $replace, $name)
     {
         if (!empty($replace)) {
@@ -58,6 +89,11 @@ class Compiler
         }
     }
 
+    /**
+     * @param $string
+     *
+     * @return array
+     */
     private function compileParameters($string)
     {
         $parameters =  [];
@@ -100,6 +136,11 @@ class Compiler
         return $result;
     }
 
+    /**
+     * @param $string
+     *
+     * @return array
+     */
     private function searchString($string)
     {
         $quotes = ['"', "'"];
@@ -123,6 +164,13 @@ class Compiler
         return $strings;
     }
 
+    /**
+     * @param $string
+     * @param $openSymbol
+     * @param $closeSymbol
+     *
+     * @return array
+     */
     private function searchArrays($string, $openSymbol, $closeSymbol)
     {
         $objects = [];
@@ -144,6 +192,11 @@ class Compiler
         return $objects;
     }
 
+    /**
+     * @param $string
+     *
+     * @return mixed
+     */
     private function getData($string)
     {
         if($this->isFunction($string)){
@@ -175,6 +228,11 @@ class Compiler
         }
     }
 
+    /**
+     * @param $string
+     *
+     * @return mixed
+     */
     public function run($string)
     {
         $data = $this->getData($string);
