@@ -1,0 +1,22 @@
+{
+  "name": "kasseler/compiler",
+  "description": "Kasseler compiler package ",
+  "keywords": [],
+  "type": "library",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "http://kasseler-cms.net",
+  "authors": [
+    {
+      "name": "Igor Ognichenko",
+      "email": "ognichenko.igor@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "psr-0": { "Kasseler\\Component\\Compiler\\": "" }
+  },
+  "target-dir": "Kasseler/Component/Compiler"
+}
