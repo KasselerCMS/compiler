@@ -14,7 +14,7 @@ $ composer require kasseler/compiler
 ```php
 $compiler = new Compiler('substr|md5|is_array'); //allow functions
 $compiler->run("is_array([1, 2, 3, 5])"); //return true
-$compiler->run("substr('my function compile', 3, 8)"); //return 'function'
+$compiler->run("substr('my function compile', 3, 8)"); //return string 'function'
 $compiler->run("[1, 2, 3, 4, 5]"); //return array [1, 2, 3, 4, 5]
 $compiler->run('{"assoc":[1, 2, 3, 4, 5]}'); //return assoc array ['assoc' => [1, 2, 3, 4, 5]]
 $compiler->run("md5('654')"); //return hash md5 'ab233b682ec355648e7891e66c54191b'
