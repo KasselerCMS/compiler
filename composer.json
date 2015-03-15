@@ -1,6 +1,6 @@
 {
   "name": "kasseler/compiler",
-  "description": "Kasseler compiler package ",
+  "description": "String compiler library",
   "keywords": [],
   "type": "library",
   "version": "1.0.0",
