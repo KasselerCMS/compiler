@@ -1,5 +1,12 @@
 Compiler Component
 =======
+[![Build Status](https://scrutinizer-ci.com/g/RobinCK/compiler/badges/build.png?b=master)](https://scrutinizer-ci.com/g/RobinCK/compiler/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/RobinCK/compiler/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/RobinCK/compiler/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/kasseler/compiler/v/stable.svg)](https://packagist.org/packages/kasseler/config) 
+[![Total Downloads](https://poser.pugx.org/kasseler/compiler/downloads.svg)](https://packagist.org/packages/kasseler/compiler) 
+[![Latest Unstable Version](https://poser.pugx.org/kasseler/compiler/v/unstable.svg)](https://packagist.org/packages/kasseler/compiler) 
+[![License](https://poser.pugx.org/kasseler/compiler/license.svg)](https://packagist.org/packages/kasseler/compiler)
+
 The compiler converts the string data in php.
 
 ### Requirements
