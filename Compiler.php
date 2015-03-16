@@ -14,6 +14,11 @@ class Compiler
      */
     private $types = ['assoc_array', 'array', 'string'];
 
+    private $arrayTypes = [
+        'assoc_array'   => ['open' => '{', 'close' => '}'],
+        'array'         => ['open' => '[', 'close' => ']'],
+    ];
+
     /**
      * @param $function
      */
@@ -97,23 +102,36 @@ class Compiler
     private function compileParameters($string)
     {
         $parameters =  [];
-        $arrayTypes = [
-            'assoc_array'   => ['open' => '{', 'close' => '}'],
-            'array'         => ['open' => '[', 'close' => ']'],
-        ];
-
-        foreach ($arrayTypes as $name => $tag) {
+        foreach ($this->arrayTypes as $name => $tag) {
             $replace = $this->searchArrays($string, $tag['open'], $tag['close']);
             $this->replaceParameters($string, $parameters, $replace, $name);
         }
-
-        $replacer = function($var, $value) {
-            return $var !== false && $var !== null
-                ? $var
-                : $value;
-        };
-
         $this->replaceParameters($string, $parameters, $this->searchString($string), 'string');
+
+        return $this->parametersSplit($string, $parameters);
+    }
+
+    /**
+     * @param $var
+     * @param $value
+     *
+     * @return mixed
+     */
+    private function replaceParameter($var, $value)
+    {
+        return $var !== false && $var !== null
+            ? $var
+            : $value;
+    }
+
+    /**
+     * @param $string
+     * @param $parameters
+     *
+     * @return array
+     */
+    private function parametersSplit($string, &$parameters)
+    {
         $result = preg_split('/[\s,]+/', $string);
         foreach($result as &$v) {
             $replaced = false;
@@ -125,11 +143,11 @@ class Compiler
 
                     array_shift($parameters[$type]);
                 }
-                $v = $replacer($this->decode($v), $v);
+                $v = $this->replaceParameter($this->decode($v), $v);
                 $replaced = true;
             }
             if (empty($type) && !$replaced) {
-                $v = $replacer($this->decode($v), $v);
+                $v = $this->replaceParameter($this->decode($v), $v);
             }
         }
 
