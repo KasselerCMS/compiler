@@ -3,7 +3,6 @@
   "description": "String compiler library",
   "keywords": [],
   "type": "library",
-  "version": "1.0.0",
   "license": "MIT",
   "homepage": "http://kasseler-cms.net",
   "authors": [
